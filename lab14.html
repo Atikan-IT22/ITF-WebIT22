@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <main>
+        <div class="profile" id="profile">
+            <div class="notify"><p>1</p></div>
+        </div>
+    
+        <h1 id="user">Username</h1>
+        <label>Set Username</label><input type="text" id="name"><button onclick="setName()">set</button>
+        <label>Set Img</label><input type="text" id="input"><button onclick="setImg()">set</button>
+        <div class="container">
+            <h1>Phone Number  List</h1>
+            <label>Set Para</label><input type="text" id="para_name"><label>Set Tel</label><input type="text" id="para_Tel"><button onclick="addParagraph()">set</button><button onclick="aveCSV()">export</button>
+            <table style="width: 100%;">
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                </tr>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        const username = document.getElementById("user");
+        const profile = document.getElementById("profile");
+        const newdiv = document.getElementsByClassName("container")[0];
+        function setName(){
+            username.textContent = document.getElementById("name").value;
+        };
+        function setImg(){
+            profile.style.backgroundImage = "url(" + input.value + ")";
+            console.log(input.value);
+            input.value = ""
+        };
+        function addParagraph(){
+            const newpara = document.createElement("tr");
+            newpara.textContent = document.getElementById("para_name").value
+            newdiv.appendChild(newpara)
+        };
+        function saveCSV() {
+        const csvContent = phonenumber.map(row => row.join(",")).join("\n"); // Convert array to CSV string
+        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.setAttribute("href", url);
+        link.setAttribute("download", "data.csv");
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        };
+    </script>
+</body>
+</html>
