@@ -13,12 +13,16 @@
         </div>
     
         <h1 id="user">Username</h1>
-        <label>Set Username</label><input type="text" id="name"><button onclick="setName()">set</button>
-        <label>Set Img</label><input type="text" id="input"><button onclick="setImg()">set</button>
+        <div>
+            <label>Set Username</label><input type="text" id="name"><button onclick="setName()">set</button>
+        </div>
+        <div>
+            <label>Set Img</label><input type="text" id="input"><button onclick="setImg()">set</button>
+        </div>
         <div class="container">
             <h1>Phone Number  List</h1>
-            <label>Set Para</label><input type="text" id="para_name"><label>Set Tel</label><input type="text" id="para_Tel"><button onclick="addParagraph()">set</button><button onclick="aveCSV()">export</button>
-            <table style="width: 100%;">
+            <label>Set Para</label><input type="text" id="para_name"><label>Set Tel</label><input type="text" id="para_Tel"><button onclick="addParagraph()">set</button><button onclick="saveCSV()">export</button>
+            <table style="width: 100%;"class="table">
                 <tr>
                     <th>No.</th>
                     <th>Name</th>
@@ -29,9 +33,10 @@
     </main>
 
     <script>
+        let phonenumber = []
         const username = document.getElementById("user");
         const profile = document.getElementById("profile");
-        const newdiv = document.getElementsByClassName("container")[0];
+        const newdiv = document.getElementsByClassName("table")[0];
         function setName(){
             username.textContent = document.getElementById("name").value;
         };
@@ -42,7 +47,16 @@
         };
         function addParagraph(){
             const newpara = document.createElement("tr");
-            newpara.textContent = document.getElementById("para_name").value
+            const num_para = document.createElement("td");
+            const name_para = document.createElement("td");
+            const phone_para = document.createElement("td");
+            phonenumber.push([document.getElementById("para_name").value, document.getElementById("para_Tel").value])
+            num_para.textContent = phonenumber.length
+            name_para.textContent = document.getElementById("para_name").value
+            phone_para.textContent = document.getElementById("para_Tel").value
+            newpara.appendChild(num_para)
+            newpara.appendChild(name_para)
+            newpara.appendChild(phone_para)
             newdiv.appendChild(newpara)
         };
         function saveCSV() {
